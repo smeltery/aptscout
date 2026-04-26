@@ -106,11 +106,9 @@
     const stats = await api('stats');
     // Get per-property stats
     const dcStats = await api('stats?property=desert-club');
-    const haStats = await api('stats?property=hideaway');
 
     const properties = [
       { id: 'desert-club', name: 'Desert Club Apartments', icon: '🌵', location: 'Phoenix, AZ', stats: dcStats },
-      { id: 'hideaway', name: 'Hideaway North Scottsdale', icon: '🏜️', location: 'Scottsdale, AZ', stats: haStats },
     ];
 
     app.innerHTML = `
@@ -354,7 +352,6 @@
 
     const propertyInfo = {
       'desert-club': { name: 'Desert Club', floorPlanURL: plan => `https://arizona.weidner.com/apartments/az/phoenix/desert-club0/floorplans/${plan.toLowerCase()}` },
-      'hideaway':    { name: 'Hideaway',    floorPlanURL: () => 'https://www.hideawaynorthscottsdale.com/floorplans' },
     };
     const info = propertyInfo[a.property] || { name: a.property, floorPlanURL: () => '#' };
     const floorPlanURL = info.floorPlanURL(a.floor_plan);
@@ -484,7 +481,6 @@
       { icon: '📋', title: 'View Floor Plans', action: () => { location.hash = '#/floor-plans'; } },
       { icon: '↻', title: 'Re-scrape all properties', action: doScrape },
       { icon: '🌵', title: 'Browse: Desert Club', action: () => { location.hash = '#/property/desert-club'; } },
-      { icon: '🏜️', title: 'Browse: Hideaway', action: () => { location.hash = '#/property/hideaway'; } },
     ];
     if (isUnit) {
       cmds.unshift({ icon: '←', title: 'Back to apartments', action: () => { history.back(); } });

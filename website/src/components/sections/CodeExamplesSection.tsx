@@ -10,16 +10,12 @@ export function CodeExamplesSection() {
     scrape: `# Scrape all properties
 $ aptscout scrape
 
-[1/2] Desert Club Apartments
+[1/1] Desert Club Apartments
   ⠋ Fetching floor plans and units...
   ✓ 14 plans, 24 units (24 new)
 
-[2/2] Hideaway North Scottsdale
-  ⠋ Fetching floor plans and units...
-  ✓ 17 plans, 10 units (10 new)
-
 ✓ Scrape complete.
-→ 34 units available (34 new)
+→ 24 units available (24 new)
 → Database: ~/.local/share/aptscout/aptscout.db
 
 # Or scrape a single property
@@ -38,8 +34,7 @@ $ aptscout list --renovated --available-by 2026-04-30 --sort price
 
 # List registered properties
 $ aptscout properties
-  desert-club          Desert Club Apartments
-  hideaway             Hideaway North Scottsdale`,
+  desert-club          Desert Club Apartments`,
     history: `# Show price history for a specific unit
 $ aptscout history 2146
 UNIT #2146 — B2R (2 bed / 2 bath, 1,142 sq ft)

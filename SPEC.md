@@ -92,16 +92,13 @@ Scrape all floor plans and update the database.
 ```
 $ aptscout scrape
 
-[1/2] Desert Club Apartments
+[1/1] Desert Club Apartments
   Fetching floor plans and units... ⠋ (3s)
   ✓ 14 plans, 24 units (24 new)
-
-[2/2] Hideaway North Scottsdale
-  Fetching floor plans and units... ⠹ (5s)
   ✓ 17 plans, 10 units (10 new)
 
 ✓ Scrape complete.
-→ 34 units available (34 new)
+→ 24 units available (24 new)
 → Database: ~/.local/share/aptscout/aptscout.db
 ```
 

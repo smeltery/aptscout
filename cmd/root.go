@@ -25,7 +25,7 @@ func newRootCmd(version string) *cobra.Command {
 	root.SetVersionTemplate(fmt.Sprintf("aptscout version %s\n", version))
 
 	root.PersistentFlags().StringVar(&flagDB, "db", "", "override database path")
-	root.PersistentFlags().StringVar(&flagProperty, "property", "", "filter by property (e.g. desert-club, hideaway)")
+	root.PersistentFlags().StringVar(&flagProperty, "property", "", "filter by property (e.g. desert-club)")
 
 	root.AddCommand(newScrapeCmd(version))
 	root.AddCommand(newListCmd())

@@ -43,8 +43,8 @@ func TestJoinParts(t *testing.T) {
 func TestResolveProviders_All(t *testing.T) {
 	flagProperty = ""
 	providers := resolveProviders()
-	if len(providers) < 2 {
-		t.Errorf("expected at least 2 providers, got %d", len(providers))
+	if len(providers) < 1 {
+		t.Errorf("expected at least 1 provider, got %d", len(providers))
 	}
 }
 
