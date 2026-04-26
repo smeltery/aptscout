@@ -63,7 +63,7 @@ tar -xzf /tmp/aptscout_darwin_arm64.tar.gz -C /usr/local/bin`;
 aptscout scrape
 
 # Scrape just one property
-aptscout scrape --property hideaway
+aptscout scrape --property desert-club
 
 # List 2-bed units under $2,500
 aptscout list --beds 2 --max-price 2500

@@ -24,12 +24,12 @@ func TestGet_NotFound(t *testing.T) {
 
 func TestIDs(t *testing.T) {
 	ids := IDs()
-	if len(ids) < 2 {
-		t.Fatalf("expected at least 2 provider IDs, got %d", len(ids))
+	if len(ids) < 1 {
+		t.Fatalf("expected at least 1 provider IDs, got %d", len(ids))
 	}
 
 	sort.Strings(ids)
-	expected := []string{"desert-club", "hideaway"}
+	expected := []string{"desert-club"}
 	for i, id := range expected {
 		if ids[i] != id {
 			t.Errorf("expected IDs[%d] = %q, got %q", i, id, ids[i])

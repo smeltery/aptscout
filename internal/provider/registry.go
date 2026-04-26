@@ -3,13 +3,11 @@ package provider
 import (
 	"github.com/dotbrains/aptscout/internal/models"
 	"github.com/dotbrains/aptscout/internal/provider/desertclub"
-	"github.com/dotbrains/aptscout/internal/provider/hideaway"
 )
 
 // All is the registry of all available providers.
 var All = map[string]models.Provider{
 	"desert-club": desertclub.New(),
-	"hideaway":    hideaway.New(),
 }
 
 // Get returns a provider by ID, or nil if not found.

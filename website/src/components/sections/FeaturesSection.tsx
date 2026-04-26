@@ -42,7 +42,7 @@ export function FeaturesSection() {
     {
       icon: <Home className="w-6 h-6" />,
       title: 'Provider Architecture',
-      description: 'Each property is a self-contained provider. Desert Club, Hideaway, or your own — implement one interface and register it. No other code changes needed.',
+      description: 'Each property is a self-contained provider. Desert Club or your own — implement one interface and register it. No other code changes needed.',
     },
     {
       icon: <LineChart className="w-6 h-6" />,

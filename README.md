@@ -30,7 +30,7 @@ aptscout scrape --property desert-club
 aptscout list --beds 2 --max-price 2500
 
 # Filter by property
-aptscout list --property hideaway --beds 2
+aptscout list --property desert-club --beds 2
 
 # Check price history for a unit
 aptscout history 2146
@@ -58,7 +58,6 @@ Currently supported properties:
 | Property | Provider | Site |
 |---|---|---|
 | `desert-club` | Desert Club Apartments (Weidner) | [arizona.weidner.com](https://arizona.weidner.com/apartments/az/phoenix/desert-club0/floorplans) |
-| `hideaway` | Hideaway North Scottsdale (Mark-Taylor) | [hideawaynorthscottsdale.com](https://www.hideawaynorthscottsdale.com/floorplans) |
 
 ## Installation
 
@@ -106,7 +105,7 @@ make install
 
 | Flag | Description |
 |---|---|
-| `--property <id>` | Filter by property (e.g. `desert-club`, `hideaway`) |
+| `--property <id>` | Filter by property (e.g. `desert-club`) |
 | `--db <path>` | Override database path |
 | `--version` | Print version |
 
