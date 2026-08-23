@@ -1,8 +1,8 @@
 package provider
 
 import (
-	"github.com/dotbrains/aptscout/internal/models"
-	"github.com/dotbrains/aptscout/internal/provider/desertclub"
+	"github.com/smeltery/aptscout/internal/models"
+	"github.com/smeltery/aptscout/internal/provider/desertclub"
 )
 
 // All is the registry of all available providers.

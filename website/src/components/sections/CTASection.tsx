@@ -14,7 +14,7 @@ export function CTASection() {
         </p>
         <div className="grid sm:grid-cols-3 gap-4 sm:gap-6">
           <a
-            href="https://github.com/dotbrains/aptscout"
+            href="https://github.com/smeltery/aptscout"
             target="_blank"
             rel="noopener noreferrer"
             className="bg-dark-clay/50 border border-arizona-red/30 hover:border-arizona-red rounded-xl p-6 sm:p-8 transition-all group hover:shadow-lg hover:shadow-arizona-red/20"
@@ -26,7 +26,7 @@ export function CTASection() {
             <p className="text-cream/60 text-xs sm:text-sm">Star the repo, fork it, and contribute</p>
           </a>
           <a
-            href="https://github.com/dotbrains/aptscout#readme"
+            href="https://github.com/smeltery/aptscout#readme"
             target="_blank"
             rel="noopener noreferrer"
             className="bg-dark-clay/50 border border-arizona-copper/30 hover:border-arizona-copper rounded-xl p-6 sm:p-8 transition-all group hover:shadow-lg hover:shadow-arizona-copper/20"
@@ -38,7 +38,7 @@ export function CTASection() {
             <p className="text-cream/60 text-xs sm:text-sm">README, SPEC, and database schema</p>
           </a>
           <a
-            href="https://github.com/dotbrains/aptscout/discussions"
+            href="https://github.com/smeltery/aptscout/discussions"
             target="_blank"
             rel="noopener noreferrer"
             className="bg-dark-clay/50 border border-arizona-gold/30 hover:border-arizona-gold rounded-xl p-6 sm:p-8 transition-all group hover:shadow-lg hover:shadow-arizona-gold/20"

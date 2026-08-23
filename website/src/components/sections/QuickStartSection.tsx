@@ -6,13 +6,13 @@ import { CodeBlock } from '@/components/CodeBlock';
 export function QuickStartSection() {
   const [installMethod, setInstallMethod] = useState<'go' | 'brew' | 'release'>('go');
 
-  const goExample = `go install github.com/dotbrains/aptscout@latest`;
+  const goExample = `go install github.com/smeltery/aptscout@latest`;
 
-  const brewExample = `brew tap dotbrains/tap
+  const brewExample = `brew tap smeltery/tap
 brew install --cask aptscout`;
 
   const releaseExample = `# macOS Apple Silicon
-gh release download --repo dotbrains/aptscout \\
+gh release download --repo smeltery/aptscout \\
   --pattern 'aptscout_darwin_arm64.tar.gz' --dir /tmp
 tar -xzf /tmp/aptscout_darwin_arm64.tar.gz -C /usr/local/bin`;
 

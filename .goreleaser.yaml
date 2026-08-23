@@ -9,11 +9,11 @@ builds:
 
 homebrew_casks:
   - repository:
-      owner: dotbrains
+      owner: smeltery
       name: homebrew-tap
       token: "{{ .Env.HOMEBREW_TAP_TOKEN }}"
     name: aptscout
-    homepage: https://github.com/dotbrains/aptscout
+    homepage: https://github.com/smeltery/aptscout
     description: Apartment availability tracker CLI
     license: "MIT"
     binaries: [aptscout]

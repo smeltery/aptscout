@@ -6,7 +6,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/dotbrains/aptscout/internal/models"
+	"github.com/smeltery/aptscout/internal/models"
 )
 
 func TestOrdinal(t *testing.T) {

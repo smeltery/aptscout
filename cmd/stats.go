@@ -5,8 +5,8 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/dotbrains/aptscout/internal/db"
-	"github.com/dotbrains/aptscout/internal/display"
+	"github.com/smeltery/aptscout/internal/db"
+	"github.com/smeltery/aptscout/internal/display"
 )
 
 func newStatsCmd() *cobra.Command {

@@ -2,8 +2,8 @@
 
 ![aptscout](./assets/og-image.svg)
 
-[![CI](https://github.com/dotbrains/aptscout/actions/workflows/ci.yml/badge.svg)](https://github.com/dotbrains/aptscout/actions/workflows/ci.yml)
-[![Release](https://github.com/dotbrains/aptscout/actions/workflows/release.yml/badge.svg)](https://github.com/dotbrains/aptscout/actions/workflows/release.yml)
+[![CI](https://github.com/smeltery/aptscout/actions/workflows/ci.yml/badge.svg)](https://github.com/smeltery/aptscout/actions/workflows/ci.yml)
+[![Release](https://github.com/smeltery/aptscout/actions/workflows/release.yml/badge.svg)](https://github.com/smeltery/aptscout/actions/workflows/release.yml)
 [![License: PolyForm Shield 1.0.0](https://img.shields.io/badge/License-PolyForm%20Shield%201.0.0-blue.svg)](https://polyformproject.org/licenses/shield/1.0.0/)
 
 ![Go](https://img.shields.io/badge/-Go-00ADD8?style=flat-square&logo=go&logoColor=white)
@@ -18,7 +18,7 @@ Scrape apartment availability across multiple properties, store results in SQLit
 
 ```sh
 # Install
-go install github.com/dotbrains/aptscout@latest
+go install github.com/smeltery/aptscout@latest
 
 # Scrape all properties
 aptscout scrape
@@ -64,27 +64,27 @@ Currently supported properties:
 ### Via `go install`
 
 ```sh
-go install github.com/dotbrains/aptscout@latest
+go install github.com/smeltery/aptscout@latest
 ```
 
 ### Via Homebrew
 
 ```sh
-brew tap dotbrains/tap
+brew tap smeltery/tap
 brew install --cask aptscout
 ```
 
 ### Via GitHub Release
 
 ```sh
-gh release download --repo dotbrains/aptscout --pattern 'aptscout_darwin_arm64.tar.gz' --dir /tmp
+gh release download --repo smeltery/aptscout --pattern 'aptscout_darwin_arm64.tar.gz' --dir /tmp
 tar -xzf /tmp/aptscout_darwin_arm64.tar.gz -C /usr/local/bin
 ```
 
 ### From source
 
 ```sh
-git clone https://github.com/dotbrains/aptscout.git
+git clone https://github.com/smeltery/aptscout.git
 cd aptscout
 make install
 ```

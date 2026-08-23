@@ -5,7 +5,7 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/dotbrains/aptscout/internal/provider"
+	"github.com/smeltery/aptscout/internal/provider"
 )
 
 func newPropertiesCmd() *cobra.Command {

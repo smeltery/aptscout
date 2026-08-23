@@ -5,7 +5,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/dotbrains/aptscout/internal/models"
+	"github.com/smeltery/aptscout/internal/models"
 )
 
 func mustOpen(t *testing.T) *DB {

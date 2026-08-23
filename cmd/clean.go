@@ -5,7 +5,7 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/dotbrains/aptscout/internal/db"
+	"github.com/smeltery/aptscout/internal/db"
 )
 
 func newCleanCmd() *cobra.Command {

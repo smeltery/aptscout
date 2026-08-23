@@ -11,7 +11,7 @@ import (
 
 	"golang.org/x/net/html"
 
-	"github.com/dotbrains/aptscout/internal/models"
+	"github.com/smeltery/aptscout/internal/models"
 )
 
 const (

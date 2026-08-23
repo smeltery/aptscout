@@ -2,8 +2,8 @@
 
 ![aptscout](./assets/og-image.svg)
 
-[![CI](https://github.com/dotbrains/aptscout/actions/workflows/ci.yml/badge.svg)](https://github.com/dotbrains/aptscout/actions/workflows/ci.yml)
-[![Release](https://github.com/dotbrains/aptscout/actions/workflows/release.yml/badge.svg)](https://github.com/dotbrains/aptscout/actions/workflows/release.yml)
+[![CI](https://github.com/smeltery/aptscout/actions/workflows/ci.yml/badge.svg)](https://github.com/smeltery/aptscout/actions/workflows/ci.yml)
+[![Release](https://github.com/smeltery/aptscout/actions/workflows/release.yml/badge.svg)](https://github.com/smeltery/aptscout/actions/workflows/release.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ![Go](https://img.shields.io/badge/-Go-00ADD8?style=flat-square&logo=go&logoColor=white)
@@ -695,20 +695,20 @@ Uses GoReleaser. Archives: `aptscout_darwin_arm64`, `aptscout_darwin_amd64`, `ap
 ### Via `go install`
 
 ```sh
-go install github.com/dotbrains/aptscout@latest
+go install github.com/smeltery/aptscout@latest
 ```
 
 ### Via Homebrew
 
 ```sh
-brew tap dotbrains/tap
+brew tap smeltery/tap
 brew install --cask aptscout
 ```
 
 ### From source
 
 ```sh
-git clone https://github.com/dotbrains/aptscout.git
+git clone https://github.com/smeltery/aptscout.git
 cd aptscout
 make install
 ```

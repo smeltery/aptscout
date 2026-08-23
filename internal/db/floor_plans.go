@@ -3,7 +3,7 @@ package db
 import (
 	"encoding/json"
 
-	"github.com/dotbrains/aptscout/internal/models"
+	"github.com/smeltery/aptscout/internal/models"
 )
 
 // UpsertFloorPlan inserts or updates a floor plan.

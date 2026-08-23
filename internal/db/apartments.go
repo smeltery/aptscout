@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/dotbrains/aptscout/internal/models"
+	"github.com/smeltery/aptscout/internal/models"
 )
 
 // UpsertApartment inserts or updates an apartment. Returns whether the unit is new and whether the price changed.

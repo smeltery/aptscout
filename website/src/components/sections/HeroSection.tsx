@@ -41,7 +41,7 @@ export function HeroSection({ onLearnMore }: HeroSectionProps) {
               Get Started
             </a>
             <a
-              href="https://github.com/dotbrains/aptscout"
+              href="https://github.com/smeltery/aptscout"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 bg-dark-clay hover:bg-dark-mesa text-cream px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold rounded-lg border border-arizona-copper hover:border-arizona-red transition-all"

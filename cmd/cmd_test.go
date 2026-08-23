@@ -5,8 +5,8 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/dotbrains/aptscout/internal/db"
-	"github.com/dotbrains/aptscout/internal/models"
+	"github.com/smeltery/aptscout/internal/db"
+	"github.com/smeltery/aptscout/internal/models"
 )
 
 func testDBPath(t *testing.T) string {

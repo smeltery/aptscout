@@ -1,7 +1,7 @@
 package db
 
 import (
-	"github.com/dotbrains/aptscout/internal/models"
+	"github.com/smeltery/aptscout/internal/models"
 )
 
 // InsertPriceHistory records a price point for a unit.

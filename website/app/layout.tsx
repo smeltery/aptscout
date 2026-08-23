@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'aptscout — Apartment Availability Tracker',
     description: 'Scrape apartment availability across multiple properties, store results in SQLite, and browse with a filterable web UI. Track prices, catch deals, never miss a unit.',
-    url: 'https://aptscout.dotbrains.io',
+    url: 'https://aptscout.smeltery.io',
     siteName: 'aptscout',
     locale: 'en_US',
     type: 'website',

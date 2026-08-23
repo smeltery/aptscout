@@ -6,8 +6,8 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/dotbrains/aptscout/internal/db"
-	"github.com/dotbrains/aptscout/internal/models"
+	"github.com/smeltery/aptscout/internal/db"
+	"github.com/smeltery/aptscout/internal/models"
 )
 
 func mustDB(t *testing.T) *db.DB {
