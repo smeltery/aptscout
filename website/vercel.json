@@ -1,7 +1,6 @@
 {
-  "buildCommand": "pnpm build",
-  "devCommand": "pnpm dev",
-  "installCommand": "pnpm install",
-  "framework": "nextjs",
-  "outputDirectory": ".next"
+  "buildCommand": "bun run build",
+  "devCommand": "bun run dev",
+  "installCommand": "cd .. && bun install --frozen-lockfile",
+  "framework": "nextjs"
 }

@@ -1,0 +1,22 @@
+{
+  "default_lines": 350,
+  "default_files": 25,
+  "files": {
+    "SPEC.md": {
+      "limit": 762,
+      "reason": "Existing technical specification; user guides split into docs/."
+    },
+    "internal/db/db_test.go": {
+      "limit": 365,
+      "reason": "Existing backend scenarios; ratcheted at current size."
+    },
+    "internal/server/server_test.go": {
+      "limit": 405,
+      "reason": "Existing backend scenarios; ratcheted at current size."
+    },
+    "internal/server/static/app.js": {
+      "limit": 590,
+      "reason": "Existing embedded browser; preserve runtime behavior during marketing redesign."
+    }
+  }
+}

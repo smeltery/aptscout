@@ -1,197 +1,36 @@
-# aptscout — Apartment Availability Tracker
+# <img src="website/public/logo.svg" width="40" height="40" alt=""> aptscout
 
-![aptscout](./assets/og-image.svg)
+Apartment listings change. Keep the full picture.
+
+![aptscout — Find your place. Keep the full picture.](website/public/og-image.png)
 
 [![CI](https://github.com/smeltery/aptscout/actions/workflows/ci.yml/badge.svg)](https://github.com/smeltery/aptscout/actions/workflows/ci.yml)
-[![Release](https://github.com/smeltery/aptscout/actions/workflows/release.yml/badge.svg)](https://github.com/smeltery/aptscout/actions/workflows/release.yml)
-[![License: PolyForm Shield 1.0.0](https://img.shields.io/badge/License-PolyForm%20Shield%201.0.0-blue.svg)](https://polyformproject.org/licenses/shield/1.0.0/)
+[![Release](https://img.shields.io/github/v/release/smeltery/aptscout)](https://github.com/smeltery/aptscout/releases)
+[![License](https://img.shields.io/badge/license-PolyForm_Shield-blue)](LICENSE)
+![Go](https://img.shields.io/badge/Go-1.26-00ADD8?logo=go&logoColor=white)
+![SQLite](https://img.shields.io/badge/SQLite-local-003B57?logo=sqlite)
+![Next.js](https://img.shields.io/badge/Next.js-website-000?logo=nextdotjs)
+![Bun](https://img.shields.io/badge/Bun-tooling-14151a?logo=bun)
+[![Flox](https://img.shields.io/badge/Flox-dev_environment-7b59e8)](.flox/env/manifest.toml)
+![Platforms](https://img.shields.io/badge/platforms-macOS_%7C_Linux-555)
 
-![Go](https://img.shields.io/badge/-Go-00ADD8?style=flat-square&logo=go&logoColor=white)
-![Cobra](https://img.shields.io/badge/-Cobra-00ADD8?style=flat-square&logo=go&logoColor=white)
-![SQLite](https://img.shields.io/badge/-SQLite-003B57?style=flat-square&logo=sqlite&logoColor=white)
-![macOS](https://img.shields.io/badge/-macOS-000000?style=flat-square&logo=apple&logoColor=white)
-![Linux](https://img.shields.io/badge/-Linux-FCC624?style=flat-square&logo=linux&logoColor=black)
+Collect apartment availability, filter by budget and bedrooms, and track rent changes in a local SQLite database. Use the Go CLI or its embedded browser UI. No account required. The included provider supports **Desert Club Apartments in Phoenix**; additional properties can be added through providers.
 
-Scrape apartment availability across multiple properties, store results in SQLite, and browse with a filterable web UI. Track prices, catch deals, never miss a unit.
+## Get started
 
-## Quick Start
+Install a [release binary](https://github.com/smeltery/aptscout/releases), or use Go 1.26.1+:
 
 ```sh
-# Install
 go install github.com/smeltery/aptscout@latest
-
-# Scrape all properties
 aptscout scrape
-
-# Scrape a single property
-aptscout scrape --property desert-club
-
-# List 2-bed apartments under $2,500
 aptscout list --beds 2 --max-price 2500
-
-# Filter by property
-aptscout list --property desert-club --beds 2
-
-# Check price history for a unit
-aptscout history 2146
-
-# View summary stats
-aptscout stats
-
-# Browse in the web UI
 aptscout serve --open
-
-# List registered properties
-aptscout properties
 ```
 
-## How It Works
+## Documentation
 
-1. `aptscout scrape` runs each registered **provider** — a self-contained scraper for a specific apartment complex.
-2. Each provider fetches its property's website, parses floor plans and available units, and returns standardized data.
-3. Results are stored in a local **SQLite** database with composite keys `(property, unit_number)` so multiple properties coexist.
-4. Every price change is recorded in a **price history** table for tracking trends over time.
-5. Units that disappear between scrapes are marked unavailable — you can see when listings come and go.
+Start in [docs/](docs/README.md): [installation](docs/quick-start.md), [commands](docs/commands.md), [web UI](docs/web-ui.md), [data and history](docs/data.md), [providers](docs/providers.md), and [troubleshooting](docs/troubleshooting.md).
 
-Currently supported properties:
+For development, activate [Flox](https://flox.dev), then run `bun run ci`. See [development](docs/development.md) for setup, pre-commit hooks, website commands, and automatic releases.
 
-| Property | Provider | Site |
-|---|---|---|
-| `desert-club` | Desert Club Apartments (Weidner) | [arizona.weidner.com](https://arizona.weidner.com/apartments/az/phoenix/desert-club0/floorplans) |
-
-## Installation
-
-### Via `go install`
-
-```sh
-go install github.com/smeltery/aptscout@latest
-```
-
-### Via Homebrew
-
-```sh
-brew tap smeltery/tap
-brew install --cask aptscout
-```
-
-### Via GitHub Release
-
-```sh
-gh release download --repo smeltery/aptscout --pattern 'aptscout_darwin_arm64.tar.gz' --dir /tmp
-tar -xzf /tmp/aptscout_darwin_arm64.tar.gz -C /usr/local/bin
-```
-
-### From source
-
-```sh
-git clone https://github.com/smeltery/aptscout.git
-cd aptscout
-make install
-```
-
-## Commands
-
-| Command | Description |
-|---|---|
-| `aptscout scrape` | Scrape all properties (or `--property <id>` for one) |
-| `aptscout list` | List available apartments with filters |
-| `aptscout history <unit>` | Show price history for a unit |
-| `aptscout stats` | Show summary statistics |
-| `aptscout serve` | Start a local web UI to browse apartments |
-| `aptscout properties` | List registered apartment properties |
-| `aptscout clean` | Remove stale apartment data |
-
-### Global Flags
-
-| Flag | Description |
-|---|---|
-| `--property <id>` | Filter by property (e.g. `desert-club`) |
-| `--db <path>` | Override database path |
-| `--version` | Print version |
-
-### List Flags
-
-| Flag | Description |
-|---|---|
-| `--beds <n>` | Filter by bedroom count |
-| `--baths <n>` | Filter by bathroom count |
-| `--max-price <n>` | Maximum monthly rent |
-| `--min-price <n>` | Minimum monthly rent |
-| `--plan <code>` | Filter by floor plan code |
-| `--renovated` | Only renovated units |
-| `--available-by <date>` | Available by date (YYYY-MM-DD) |
-| `--sort <field>` | Sort by: `price`, `date`, `sqft`, `unit` |
-| `--json` | Output as JSON |
-
-## Web UI
-
-Browse apartments in a local web interface:
-
-```sh
-# Start the apartment browser
-aptscout serve
-
-# Custom port + auto-open browser
-aptscout serve --port 9000 --open
-```
-
-If the default port (8700) is already in use, aptscout automatically picks a free port.
-
-All assets are embedded in the binary — no external dependencies. The UI uses the same desert theme as the marketing site.
-
-Features:
-- **Property picker** — home page shows each property with live stats; click to browse its units
-- **Filter sidebar** — bedrooms, bathrooms, price range, date range, floor plan, renovated/premium
-- **Date range filter** — select a from/to date to find units available in that window; contextual empty state when no matches
-- **Apartment cards** — unit number, plan, specs, price, availability, property badge
-- **Unit detail** — full metadata, price history SVG chart, direct link to property site
-- **⌘K command palette** — quick-nav to any property, page, or action; fuzzy search, arrow keys, Enter
-- **Re-scrape from UI** — trigger a scrape without leaving the browser
-- **Keyboard shortcuts** — `⌘K` command palette, `/` to focus filters, `r` to scrape, `Escape` to clear
-
-## Adding a New Property
-
-Each property is a Go package implementing the `models.Provider` interface:
-
-```go
-type Provider interface {
-    ID() string       // "my-property"
-    Name() string     // "My Property Apartments"
-    Scrape(ctx context.Context, fetch Fetcher) (*ScrapeData, error)
-}
-```
-
-Steps:
-
-1. Create `internal/provider/myproperty/myproperty.go` implementing the interface.
-2. Add one line to `internal/provider/registry.go`:
-   ```go
-   "my-property": myproperty.New(),
-   ```
-3. That's it. `aptscout scrape` will include the new property automatically.
-
-The `Fetcher` function is provided by the scraper — your provider just calls `fetch(ctx, url)` and parses the HTML. No need to manage HTTP clients, retries, or rate limiting.
-
-## Data Storage
-
-SQLite database at `~/.local/share/aptscout/aptscout.db`. Created automatically on first run.
-
-- **`floor_plans`** — plan metadata per property (beds, baths, sqft, deposit)
-- **`apartments`** — individual units with availability and pricing
-- **`price_history`** — every price change recorded with timestamps
-- **`scrape_runs`** — log of each scrape execution with stats
-
-All tables are keyed by `(property, ...)` so data from different complexes never collides.
-
-## Dependencies
-
-- **Go 1.22+**
-- **[Cobra](https://github.com/spf13/cobra)** — CLI framework
-- **[golang.org/x/net/html](https://pkg.go.dev/golang.org/x/net/html)** — HTML parser
-- **[modernc.org/sqlite](https://pkg.go.dev/modernc.org/sqlite)** — Pure-Go SQLite (no CGO)
-
-No external JavaScript. No Node.js. No Playwright. Single static binary.
-
-## License
-
-This project is licensed under the [PolyForm Shield License 1.0.0](https://polyformproject.org/licenses/shield/1.0.0/) — see [LICENSE](LICENSE) for details.
+Licensed under [PolyForm Shield 1.0.0](LICENSE).

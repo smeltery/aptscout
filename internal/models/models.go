@@ -23,14 +23,14 @@ type ScrapeData struct {
 
 // FloorPlan represents a floor plan configuration.
 type FloorPlan struct {
-	Property    string   `json:"property"`
-	Code        string   `json:"code"`
-	Bedrooms    int      `json:"bedrooms"`
-	Bathrooms   int      `json:"bathrooms"`
-	SqFt        int      `json:"sqft"`
-	Deposit     int      `json:"deposit"`
-	IsRenovated bool     `json:"is_renovated"`
-	Features    []string `json:"features"`
+	Property    string    `json:"property"`
+	Code        string    `json:"code"`
+	Bedrooms    int       `json:"bedrooms"`
+	Bathrooms   int       `json:"bathrooms"`
+	SqFt        int       `json:"sqft"`
+	Deposit     int       `json:"deposit"`
+	IsRenovated bool      `json:"is_renovated"`
+	Features    []string  `json:"features"`
 	UpdatedAt   time.Time `json:"updated_at"`
 }
 
@@ -98,11 +98,11 @@ type ApartmentDetail struct {
 
 // Stats holds summary statistics.
 type Stats struct {
-	FloorPlans    int            `json:"floor_plans"`
-	Available     int            `json:"available"`
-	ByBedrooms    []BedroomStats `json:"by_bedrooms"`
-	LastScrape    *time.Time     `json:"last_scrape"`
-	TotalScrapes  int            `json:"total_scrapes"`
+	FloorPlans   int            `json:"floor_plans"`
+	Available    int            `json:"available"`
+	ByBedrooms   []BedroomStats `json:"by_bedrooms"`
+	LastScrape   *time.Time     `json:"last_scrape"`
+	TotalScrapes int            `json:"total_scrapes"`
 }
 
 // BedroomStats holds stats for a specific bedroom count.

@@ -1,252 +1,233 @@
 'use client';
 
-import React, { useState } from 'react';
-import { Github, ExternalLink, Menu, X } from 'lucide-react';
-import Image from 'next/image';
+import Link from 'next/link';
 
-interface MarketingNavProps {
-  transparent?: boolean;
-}
+import {
+  BookOpen,
+  Compass,
+  Database,
+  Grid2X2,
+  Menu,
+  Search,
+  Terminal,
+  X,
+} from 'lucide-react';
+import { useEffect, useRef } from 'react';
+import { usePathname } from 'next/navigation';
+import { BrandIcon } from './BrandIcon';
+import { Brand, repository } from './Brand';
+import { SearchDialog } from './SearchDialog';
 
-export function MarketingNav({ transparent = false }: MarketingNavProps) {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
-    e.preventDefault();
-    document.querySelector(targetId)?.scrollIntoView({ behavior: 'smooth' });
-    setMobileMenuOpen(false);
+export function MarketingNav() {
+  const menu = useRef<HTMLDialogElement>(null);
+  const search = useRef<HTMLDialogElement>(null);
+  const pathname = usePathname();
+  useEffect(() => {
+    menu.current?.close();
+  }, [pathname]);
+  useEffect(() => {
+    const key = (event: KeyboardEvent) => {
+      if ((event.metaKey || event.ctrlKey) && event.key === 'k') {
+        event.preventDefault();
+        menu.current?.close();
+        search.current?.showModal();
+      }
+    };
+    document.addEventListener('keydown', key);
+    return () => document.removeEventListener('keydown', key);
+  }, []);
+  const openSearch = () => {
+    menu.current?.close();
+    search.current?.showModal();
   };
-
   return (
-    <nav className={`fixed left-0 right-0 top-0 z-50 w-full px-4 sm:px-6 py-4 backdrop-blur-xl transition-colors ${transparent ? 'bg-dark-mesa/80' : 'bg-dark-mesa border-b border-arizona-copper/30'}`}>
-      <div className="max-w-7xl mx-auto flex items-center justify-between">
-        <a href="/" className="hover:opacity-80 transition-opacity flex items-center gap-2 sm:gap-3">
-          <Image src="/favicon.svg" alt="aptscout" width={32} height={32} className="w-7 h-7 sm:w-8 sm:h-8" />
-          <span className="text-lg sm:text-xl font-bold text-cream">aptscout</span>
-        </a>
-
-        {/* Desktop Navigation */}
-        <div className="hidden lg:flex items-center gap-8">
-          <a
-            href="/#features"
-            onClick={(e) => handleSmoothScroll(e, '#features')}
-            className="text-cream/80 hover:text-cream transition-colors text-sm font-medium"
+    <>
+      <Link className="skip" href="#main">
+        Skip to content
+      </Link>
+      <header className="site-header">
+        <div className="wrap header-inner">
+          <Brand />
+          <nav className="desktop-nav" aria-label="Main navigation">
+            <Link href="/#features">Explore aptscout</Link>
+            <Link href="/docs/quick-start">Getting started</Link>
+            <Link href="/#how-it-works">Our approach</Link>
+          </nav>
+          <button
+            className="header-search-trigger"
+            onClick={openSearch}
+            aria-label="Search documentation"
           >
-            Features
-          </a>
-          <a
-            href="/#how-it-works"
-            onClick={(e) => handleSmoothScroll(e, '#how-it-works')}
-            className="text-cream/80 hover:text-cream transition-colors text-sm font-medium"
+            <Search className="icon" />
+            <span>Search</span>
+            <kbd>⌘ K</kbd>
+          </button>
+          <Link className="github-link" href={repository}>
+            <BrandIcon name="github" />
+            <span>GitHub</span>
+          </Link>
+          <button
+            className="menu-toggle"
+            onClick={() => menu.current?.showModal()}
+            aria-haspopup="dialog"
           >
-            How It Works
-          </a>
-          <a
-            href="/#use-cases"
-            onClick={(e) => handleSmoothScroll(e, '#use-cases')}
-            className="text-cream/80 hover:text-cream transition-colors text-sm font-medium"
-          >
-            Use Cases
-          </a>
-          <div className="flex items-center gap-3 ml-2">
-            <a
-              href="https://github.com/smeltery/aptscout"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-2 bg-dark-clay hover:bg-dark-mesa border border-arizona-copper text-cream rounded-lg transition-colors text-sm font-medium"
-            >
-              <Github className="w-4 h-4" />
-              <span>Star</span>
-            </a>
-            <a
-              href="/#quick-start"
-              onClick={(e) => handleSmoothScroll(e, '#quick-start')}
-              className="bg-gradient-to-r from-arizona-red to-arizona-copper hover:from-arizona-copper hover:to-arizona-gold text-white px-6 py-2 rounded-lg shadow-lg shadow-arizona-red/30 text-sm font-semibold transition-all"
-            >
-              Get Started
-            </a>
-          </div>
+            Menu <Menu className="icon" />
+          </button>
         </div>
-
-        {/* Mobile Menu Button */}
-        <button
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="lg:hidden p-2 text-cream hover:text-arizona-red transition-colors"
-          aria-label="Toggle menu"
-        >
-          {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-        </button>
-      </div>
-
-      {/* Mobile Menu */}
-      {mobileMenuOpen && (
-        <div className="lg:hidden fixed top-[72px] left-0 right-0 bg-dark-mesa border-b border-arizona-copper/30 backdrop-blur-xl shadow-xl z-40">
-          <div className="px-4 py-6 space-y-4">
-            <a
-              href="/#features"
-              onClick={(e) => handleSmoothScroll(e, '#features')}
-              className="block text-cream/80 hover:text-cream transition-colors text-base font-medium py-2"
-            >
-              Features
-            </a>
-            <a
-              href="/#how-it-works"
-              onClick={(e) => handleSmoothScroll(e, '#how-it-works')}
-              className="block text-cream/80 hover:text-cream transition-colors text-base font-medium py-2"
-            >
-              How It Works
-            </a>
-            <a
-              href="/#use-cases"
-              onClick={(e) => handleSmoothScroll(e, '#use-cases')}
-              className="block text-cream/80 hover:text-cream transition-colors text-base font-medium py-2"
-            >
-              Use Cases
-            </a>
-            <div className="pt-4 space-y-3 border-t border-arizona-copper/20">
-              <a
-                href="https://github.com/smeltery/aptscout"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 px-4 py-3 bg-dark-clay hover:bg-dark-mesa border border-arizona-copper text-cream rounded-lg transition-colors text-sm font-medium w-full"
-              >
-                <Github className="w-4 h-4" />
-                <span>Star on GitHub</span>
-              </a>
-              <a
-                href="/#quick-start"
-                onClick={(e) => handleSmoothScroll(e, '#quick-start')}
-                className="flex items-center justify-center bg-gradient-to-r from-arizona-red to-arizona-copper hover:from-arizona-copper hover:to-arizona-gold text-white px-6 py-3 rounded-lg shadow-lg shadow-arizona-red/30 text-sm font-semibold transition-all w-full"
-              >
-                Get Started
-              </a>
+      </header>
+      <dialog
+        ref={menu}
+        onClick={(event) => {
+          if ((event.target as HTMLElement).closest('a')) menu.current?.close();
+        }}
+        className="mobile-dialog"
+        aria-label="Main menu"
+      >
+        <div className="mobile-panel-heading">
+          <Brand />
+          <button
+            className="close-overlay"
+            aria-label="Close menu"
+            onClick={() => menu.current?.close()}
+          >
+            <X />
+          </button>
+        </div>
+        <div className="mobile-panel-body">
+          <p className="eyebrow">A little clarity goes a long way</p>
+          <h2>What’s next?</h2>
+          <button className="mobile-search-trigger" onClick={openSearch}>
+            <Search className="icon" />
+            Search docs & guides<kbd>⌘ K</kbd>
+          </button>
+          <nav className="mobile-primary" aria-label="Mobile navigation">
+            <Link className="mobile-feature-card" href="/#features">
+              <span className="nav-card-icon">
+                <Grid2X2 />
+              </span>
+              <span>
+                <strong>Explore aptscout</strong>
+                <small>A clearer view of your apartment search.</small>
+              </span>
+            </Link>
+            <div className="mobile-resource-grid">
+              <Link href="/docs/quick-start">
+                <BookOpen />
+                <strong>Getting started</strong>
+                <small>From install to your first listing.</small>
+              </Link>
+              <Link href="/#how-it-works">
+                <Compass />
+                <strong>Our approach</strong>
+                <small>Your search, stored on your device.</small>
+              </Link>
             </div>
+          </nav>
+          <div className="mobile-tasks">
+            <div className="mobile-section-label">
+              <h3>Browse by task</h3>
+              <span>Start with a question</span>
+            </div>
+            <nav aria-label="Tasks">
+              <Link href="/docs/commands">
+                <Terminal />
+                Use the CLI
+              </Link>
+              <Link href="/docs/web-ui">
+                <Grid2X2 />
+                Browse apartments
+              </Link>
+              <Link href="/docs/data">
+                <Database />
+                Understand your data
+              </Link>
+              <Link href="/docs/providers">
+                <Compass />
+                Explore providers
+              </Link>
+            </nav>
+          </div>
+          <div className="mobile-starter">
+            <p className="eyebrow">Not sure where to begin?</p>
+            <h3>Your next place starts here.</h3>
+            <p>Collect listings, set your budget, and see what fits.</p>
+            <Link href="/docs/quick-start">Start your first search</Link>
           </div>
         </div>
-      )}
-    </nav>
+        <div className="mobile-panel-footer">
+          <Link className="icon-link" href={repository}>
+            <BrandIcon name="github" />
+            GitHub
+          </Link>
+          <Link href={`${repository}/issues`}>Feedback & issues</Link>
+        </div>
+      </dialog>
+      <SearchDialog dialogRef={search} />
+    </>
   );
 }
 
 export function MarketingFooter() {
-  const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
-    e.preventDefault();
-    document.querySelector(targetId)?.scrollIntoView({ behavior: 'smooth' });
-  };
-
+  const groups = [
+    [
+      'The project',
+      [
+        ['Overview', '/docs'],
+        ['Commands', '/docs/commands'],
+        ['Properties', '/docs/providers'],
+      ],
+    ],
+    [
+      'Resources',
+      [
+        ['Brand & assets', '/brand'],
+        ['Getting started', '/docs/quick-start'],
+        ['Data and history', '/docs/data'],
+        ['Troubleshooting', '/docs/troubleshooting'],
+        ['Contributing', '/docs/development'],
+      ],
+    ],
+    [
+      'In the open',
+      [
+        ['About Smeltery', 'https://github.com/smeltery'],
+        ['GitHub repository', repository],
+        ['Feedback & issues', `${repository}/issues`],
+        ['Releases', `${repository}/releases`],
+        ['License', `${repository}/blob/master/LICENSE`],
+      ],
+    ],
+  ] as const;
   return (
-    <footer className="bg-dark-mesa border-t border-arizona-copper/30 py-12 sm:py-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-12 mb-12">
-          <div>
-            <div className="flex items-center gap-3 mb-4">
-              <Image src="/favicon.svg" alt="aptscout" width={32} height={32} className="w-8 h-8" />
-              <span className="text-xl font-bold text-cream">aptscout</span>
-            </div>
-            <p className="text-cream/60 text-sm leading-relaxed mb-4">
-              Apartment availability tracker CLI. Scrape once, browse anytime. Track prices and availability with a local SQLite database and web UI.
+    <footer className="site-footer">
+      <div className="wrap">
+        <div className="footer-grid">
+          <div className="footer-brand">
+            <Brand />
+            <p>
+              A little clarity.
+              <br />A better place to call home.
             </p>
-            <div className="flex items-center gap-3">
-              <a
-                href="https://github.com/smeltery/aptscout"
-                className="text-cream/60 hover:text-cream transition-colors"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="GitHub"
-              >
-                <Github className="w-5 h-5" />
-              </a>
-            </div>
+            <span>Local tools for a more thoughtful apartment search.</span>
           </div>
-          <div>
-            <h4 className="text-cream font-semibold mb-4 text-sm uppercase tracking-wider">Product</h4>
-            <ul className="space-y-3">
-              <li>
-                <a
-                  href="/#features"
-                  onClick={(e) => handleSmoothScroll(e, '#features')}
-                  className="text-cream/70 hover:text-cream text-sm transition-colors inline-block cursor-pointer"
-                >
-                  Features
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/#how-it-works"
-                  onClick={(e) => handleSmoothScroll(e, '#how-it-works')}
-                  className="text-cream/70 hover:text-cream text-sm transition-colors inline-block cursor-pointer"
-                >
-                  How It Works
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/#use-cases"
-                  onClick={(e) => handleSmoothScroll(e, '#use-cases')}
-                  className="text-cream/70 hover:text-cream text-sm transition-colors inline-block cursor-pointer"
-                >
-                  Use Cases
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/#quick-start"
-                  onClick={(e) => handleSmoothScroll(e, '#quick-start')}
-                  className="text-cream/70 hover:text-cream text-sm transition-colors inline-block cursor-pointer"
-                >
-                  Quick Start
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="text-cream font-semibold mb-4 text-sm uppercase tracking-wider">Resources</h4>
-            <ul className="space-y-3">
-              <li>
-                <a href="https://github.com/smeltery/aptscout#readme" className="text-cream/70 hover:text-cream text-sm transition-colors inline-flex items-center gap-1.5" target="_blank" rel="noopener noreferrer">
-                  Documentation
-                  <ExternalLink className="w-3 h-3" />
-                </a>
-              </li>
-              <li>
-                <a href="https://github.com/smeltery/aptscout/blob/master/SPEC.md" className="text-cream/70 hover:text-cream text-sm transition-colors inline-flex items-center gap-1.5" target="_blank" rel="noopener noreferrer">
-                  Specification
-                  <ExternalLink className="w-3 h-3" />
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="text-cream font-semibold mb-4 text-sm uppercase tracking-wider">Community</h4>
-            <ul className="space-y-3">
-              <li>
-                <a href="https://github.com/smeltery/aptscout" className="text-cream/70 hover:text-cream text-sm transition-colors inline-flex items-center gap-1.5" target="_blank" rel="noopener noreferrer">
-                  GitHub Repository
-                  <ExternalLink className="w-3 h-3" />
-                </a>
-              </li>
-              <li>
-                <a href="https://github.com/smeltery/aptscout/issues" className="text-cream/70 hover:text-cream text-sm transition-colors inline-flex items-center gap-1.5" target="_blank" rel="noopener noreferrer">
-                  Report Issues
-                  <ExternalLink className="w-3 h-3" />
-                </a>
-              </li>
-              <li>
-                <a href="https://github.com/smeltery/aptscout/discussions" className="text-cream/70 hover:text-cream text-sm transition-colors inline-flex items-center gap-1.5" target="_blank" rel="noopener noreferrer">
-                  Discussions
-                  <ExternalLink className="w-3 h-3" />
-                </a>
-              </li>
-            </ul>
-          </div>
+          {groups.map(([title, links]) => (
+            <nav key={title} aria-label={title}>
+              <h2>{title}</h2>
+              {links.map(([label, href]) => (
+                <Link key={label} href={href}>
+                  {label}
+                </Link>
+              ))}
+            </nav>
+          ))}
         </div>
-        <div className="pt-8 border-t border-arizona-copper/30 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-cream/60 text-sm">
-            © {new Date().getFullYear()} aptscout. All rights reserved.
-          </p>
-          <p className="text-cream/50 text-xs">
-            Licensed under PolyForm Shield 1.0.0
-          </p>
+        <div className="footer-bottom">
+          <span>© {new Date().getFullYear()} Smeltery Labs</span>
+          <Link href={`${repository}/blob/master/LICENSE`}>
+            PolyForm Shield license
+          </Link>
+          <span className="footer-note">Built for the way you search.</span>
+          <Link href="#top">Back to top ↑</Link>
         </div>
       </div>
     </footer>

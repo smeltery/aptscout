@@ -1,63 +1,44 @@
 name: CI
-
 on:
   push:
-    branches: [main, master]
+    branches: [master]
   pull_request:
-
+  workflow_dispatch:
+permissions:
+  contents: read
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
-
 jobs:
-  test:
+  verify:
+    name: Verify (${{ matrix.os }})
     strategy:
+      fail-fast: false
       matrix:
         os: [ubuntu-latest, macos-latest]
     runs-on: ${{ matrix.os }}
-    timeout-minutes: 45
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v5
-
-      - uses: actions/setup-go@v6
-        with:
-          go-version-file: go.mod
-
-      - name: Run tests
-        run: go test -race -coverprofile=coverage.out ./...
-
-      - name: Upload coverage
-        uses: actions/upload-artifact@v5
+      - uses: flox/install-flox-action@v2
+      - name: Install locked dependencies
+        run: flox activate -- bun install --frozen-lockfile
+      - name: Go formatting, vet, race tests, and build
+        run: flox activate -- bash scripts/check.sh go
+      - name: Install browser for documentation and website checks
+        if: runner.os == 'Linux'
+        run: |
+          flox activate -- bunx playwright install --with-deps chromium
+      - name: Documentation and budget checks
+        if: runner.os == 'Linux'
+        run: flox activate -- bash scripts/check.sh docs
+      - name: Website and browser checks
+        if: runner.os == 'Linux'
+        run: flox activate -- bash scripts/check.sh web
+      - name: Workflow and shell checks
+        if: runner.os == 'Linux'
+        run: flox activate -- bash scripts/check.sh workflows
+      - uses: actions/upload-artifact@v5
         with:
           name: coverage-${{ matrix.os }}
           path: coverage.out
-
-  lint:
-    runs-on: ubuntu-latest
-    timeout-minutes: 15
-    steps:
-      - uses: actions/checkout@v5
-
-      - uses: actions/setup-go@v6
-        with:
-          go-version-file: go.mod
-
-      - uses: golangci/golangci-lint-action@v8
-        with:
-          version: v2.11.2
-
-  build:
-    strategy:
-      matrix:
-        os: [ubuntu-latest, macos-latest]
-    runs-on: ${{ matrix.os }}
-    timeout-minutes: 45
-    steps:
-      - uses: actions/checkout@v5
-
-      - uses: actions/setup-go@v6
-        with:
-          go-version-file: go.mod
-
-      - name: Build
-        run: go build -o aptscout .

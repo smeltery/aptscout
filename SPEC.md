@@ -666,51 +666,17 @@ Target: **≥ 80% code coverage**. Tests must not require network access.
 - Visual review of the web UI (manual QA).
 - Browser rendering of the SPA.
 
-## GitHub Actions
+## Development, CI, and installation
 
-### CI — `.github/workflows/ci.yml`
+The current setup lives in [docs/development.md](docs/development.md).
+CI runs shared Flox-backed Go, documentation, website, and workflow checks.
+Successful push CI on `master` triggers automatic patch releases of the tested commit.
+Release builds target macOS and Linux on Intel and ARM.
 
-Triggered on push to `main` and all pull requests.
-
-**Jobs:**
-
-1. **test**
-   - Matrix: `go: [stable]`, `os: [ubuntu-latest, macos-latest]`
-   - Steps: checkout → setup Go → `go vet ./...` → `go test -race -coverprofile=coverage.out ./...` → enforce ≥ 80% coverage
-
-2. **lint**
-   - Uses `golangci/golangci-lint-action@v8`
-
-3. **build**
-   - `go build -o aptscout .` on both macOS and Linux
-
-### Release — `.github/workflows/release.yml`
-
-Triggered on tags matching `v*`.
-
-Uses GoReleaser. Archives: `aptscout_darwin_arm64`, `aptscout_darwin_amd64`, `aptscout_linux_arm64`, `aptscout_linux_amd64`.
-
-## Installation
-
-### Via `go install`
+For installation instructions, see [Quick start](docs/quick-start.md).
 
 ```sh
 go install github.com/smeltery/aptscout@latest
-```
-
-### Via Homebrew
-
-```sh
-brew tap smeltery/tap
-brew install --cask aptscout
-```
-
-### From source
-
-```sh
-git clone https://github.com/smeltery/aptscout.git
-cd aptscout
-make install
 ```
 
 ## Example Workflows
