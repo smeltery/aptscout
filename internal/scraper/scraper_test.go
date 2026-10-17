@@ -9,8 +9,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/dotbrains/aptscout/internal/db"
-	"github.com/dotbrains/aptscout/internal/models"
+	"github.com/smeltery/aptscout/internal/db"
+	"github.com/smeltery/aptscout/internal/models"
 )
 
 // mockProvider is a fake provider for testing.

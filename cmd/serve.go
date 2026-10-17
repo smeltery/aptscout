@@ -8,8 +8,8 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/dotbrains/aptscout/internal/db"
-	"github.com/dotbrains/aptscout/internal/server"
+	"github.com/smeltery/aptscout/internal/db"
+	"github.com/smeltery/aptscout/internal/server"
 )
 
 func newServeCmd(version string) *cobra.Command {

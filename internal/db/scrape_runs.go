@@ -4,7 +4,7 @@ import (
 	"database/sql"
 	"time"
 
-	"github.com/dotbrains/aptscout/internal/models"
+	"github.com/smeltery/aptscout/internal/models"
 )
 
 // InsertScrapeRun starts a new scrape run and returns its ID.

@@ -26,3 +26,14 @@ website/out/
 
 # GoReleaser
 dist/
+
+node_modules/
+.website-studio/
+.flox/cache/
+.flox/run/
+.flox/log/
+website/public/diagrams/
+.env
+.env.*
+test-results/
+playwright-report/

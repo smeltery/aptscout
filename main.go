@@ -3,7 +3,7 @@ package main
 import (
 	"os"
 
-	"github.com/dotbrains/aptscout/cmd"
+	"github.com/smeltery/aptscout/cmd"
 )
 
 var version = "dev"

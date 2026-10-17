@@ -18,7 +18,11 @@ vet:
 	go vet ./...
 
 lint:
-	golangci-lint run
+	flox activate -- bun run format:check
+	flox activate -- bunx --no-install markdownlint-cli2
+	flox activate -- bash scripts/check.sh workflows
+	flox activate -- go vet ./...
+	flox activate -- golangci-lint run
 
 clean:
 	rm -f $(BINARY) coverage.out
@@ -27,3 +31,13 @@ cover: test
 	go tool cover -html=coverage.out
 
 .DEFAULT_GOAL := build
+
+.PHONY: check docs website
+check:
+	flox activate -- bun run ci
+
+docs:
+	flox activate -- bash scripts/check.sh docs
+
+website:
+	flox activate -- bun run --cwd website dev

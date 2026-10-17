@@ -6,11 +6,11 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/dotbrains/aptscout/internal/db"
-	"github.com/dotbrains/aptscout/internal/models"
-	"github.com/dotbrains/aptscout/internal/provider"
-	"github.com/dotbrains/aptscout/internal/scraper"
-	"github.com/dotbrains/aptscout/internal/spinner"
+	"github.com/smeltery/aptscout/internal/db"
+	"github.com/smeltery/aptscout/internal/models"
+	"github.com/smeltery/aptscout/internal/provider"
+	"github.com/smeltery/aptscout/internal/scraper"
+	"github.com/smeltery/aptscout/internal/spinner"
 )
 
 func newScrapeCmd(version string) *cobra.Command {

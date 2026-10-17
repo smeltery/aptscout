@@ -10,10 +10,10 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/dotbrains/aptscout/internal/db"
-	"github.com/dotbrains/aptscout/internal/models"
-	"github.com/dotbrains/aptscout/internal/provider"
-	"github.com/dotbrains/aptscout/internal/scraper"
+	"github.com/smeltery/aptscout/internal/db"
+	"github.com/smeltery/aptscout/internal/models"
+	"github.com/smeltery/aptscout/internal/provider"
+	"github.com/smeltery/aptscout/internal/scraper"
 )
 
 //go:embed static/*

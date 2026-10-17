@@ -1,0 +1,11 @@
+bun.lock
+.flox/
+.website-studio/
+coverage.out
+SPEC.md
+internal/
+go.*
+*.go
+website/.next/
+website/next-env.d.ts
+website/public/diagrams/

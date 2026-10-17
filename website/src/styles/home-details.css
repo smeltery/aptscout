@@ -1,0 +1,241 @@
+.workflow-section {
+  background: var(--sage);
+  padding-block: 75px;
+  border-block: 1px solid var(--line);
+}
+.workflow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 100px;
+}
+h2 em {
+  font-family: var(--serif);
+  font-weight: 400;
+  color: var(--accent);
+}
+.workflow h2 {
+  margin: 17px 0 24px;
+}
+.workflow > div > p:not(.eyebrow) {
+  font-size: 14px;
+  max-width: 430px;
+  margin-bottom: 23px;
+}
+.workflow ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.workflow li {
+  display: flex;
+  gap: 24px;
+  padding: 22px 0;
+  border-bottom: 1px solid #e2ccba;
+}
+.workflow li:first-child {
+  padding-top: 0;
+}
+.workflow li > span {
+  font: 12px var(--mono);
+  color: var(--accent);
+  padding-top: 5px;
+}
+.workflow h3 {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+.workflow li p {
+  font-size: 12px;
+  margin-bottom: 14px;
+}
+.workflow code {
+  font: 11px var(--mono);
+  overflow-wrap: anywhere;
+}
+.start-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 60px;
+}
+.start-section h2 {
+  margin-bottom: 22px;
+}
+.start-section p {
+  font-size: 13px;
+  margin-bottom: 20px;
+}
+.start-section .eyebrow {
+  font-size: 10px;
+}
+.install-card {
+  padding: 27px;
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  min-width: 0;
+}
+.code-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  color: var(--muted);
+  font: 9px var(--mono);
+}
+.copy-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  background: var(--paper);
+  font-size: 11px;
+}
+.install-card pre {
+  overflow: auto;
+  font: 12px/1.8 var(--mono);
+  color: var(--accent);
+  padding-block: 20px;
+}
+.install-card > p {
+  font-size: 10px;
+  margin: 0;
+}
+.brand-page {
+  padding-block: 70px;
+  min-height: 65vh;
+}
+.brand-page p {
+  margin: 24px 0;
+}
+.brand-assets {
+  display: flex;
+  gap: 25px;
+  flex-wrap: wrap;
+}
+.brand-assets a {
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+.brand-assets img {
+  max-width: 100%;
+  height: auto;
+}
+@media (max-width: 1100px) {
+  .hero {
+    gap: 35px;
+  }
+  .hero h1 {
+    font-size: 53px;
+  }
+  .listing-preview {
+    padding: 22px;
+  }
+  .workflow {
+    gap: 50px;
+  }
+}
+@media (max-width: 780px) {
+  .hero {
+    grid-template-columns: 1fr;
+    padding-block: 48px;
+    gap: 38px;
+  }
+  .hero h1 {
+    font-size: clamp(43px, 8vw, 62px);
+  }
+  .hero-description {
+    font-size: 14px;
+  }
+  .desktop-break {
+    display: none;
+  }
+  .listing-preview {
+    transform: none;
+  }
+  .hero-notes {
+    gap: 14px;
+  }
+  .hero-notes span + span::before {
+    margin-right: 14px;
+  }
+  .proof-strip {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    font-size: 11px;
+  }
+  .proof-strip > span {
+    gap: 10px;
+  }
+  .section {
+    padding-block: 50px;
+  }
+  .section-heading {
+    display: block;
+  }
+  .section-heading > p {
+    margin-top: 20px;
+  }
+  .feature-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  .feature-grid h3 {
+    margin-top: 14px;
+  }
+  .workflow {
+    grid-template-columns: 1fr;
+    gap: 38px;
+  }
+  .workflow-section {
+    padding-block: 45px;
+  }
+  .start-section {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  .preview-filters {
+    gap: 4px;
+    font-size: 8px;
+  }
+  .preview-filters span {
+    padding-inline: 7px;
+  }
+  .preview-unit {
+    padding: 14px 10px;
+    gap: 10px;
+  }
+  .sample-label {
+    font-size: 7px;
+  }
+  .preview-top {
+    font-size: 10px;
+  }
+  .install-card {
+    padding: 20px;
+  }
+}
+.workflow li > div {
+  min-width: 0;
+}
+@media (max-width: 360px) {
+  .hero-actions {
+    gap: 16px;
+  }
+  .hero-actions .button {
+    padding-inline: 16px;
+    gap: 12px;
+  }
+  .hero-notes {
+    font-size: 9px;
+    gap: 10px;
+  }
+  .hero-notes span + span::before {
+    margin-right: 10px;
+  }
+}

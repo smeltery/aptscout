@@ -1,4 +1,4 @@
-module github.com/dotbrains/aptscout
+module github.com/smeltery/aptscout
 
 go 1.26.1
 

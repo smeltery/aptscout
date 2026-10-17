@@ -1,0 +1,5 @@
+Brand marks identify their respective services and do not imply endorsement.
+GitHub: Simple Icons, CC0 (https://simpleicons.org).
+ChatGPT, Claude, v0, T3 Chat, Scira, Cursor: service-identification SVGs
+from the Smeltery convrt project (https://github.com/smeltery/convrt).
+All trademarks belong to their respective owners.
