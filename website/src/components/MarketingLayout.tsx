@@ -77,7 +77,14 @@ export function MarketingNav() {
           </button>
         </div>
       </header>
-      <dialog ref={menu} className="mobile-dialog" aria-label="Main menu">
+      <dialog
+        ref={menu}
+        onClick={(event) => {
+          if ((event.target as HTMLElement).closest('a')) menu.current?.close();
+        }}
+        className="mobile-dialog"
+        aria-label="Main menu"
+      >
         <div className="mobile-panel-heading">
           <Brand />
           <button

@@ -118,6 +118,17 @@ test('documentation copy and diagram controls work', async ({
     'go install',
   );
   await page.goto('/docs');
+  await page
+    .locator('.docs-toc')
+    .locator('summary')
+    .filter({ hasText: 'Open in chat' })
+    .click();
+  await expect(page.locator('.docs-toc .chat-providers a')).toHaveCount(6);
+  await expect(
+    page
+      .locator('.docs-toc .chat-providers')
+      .getByRole('link', { name: 'ChatGPT' }),
+  ).toBeVisible();
   await page.getByRole('button', { name: 'Expand diagram' }).click();
   await expect(
     page.getByRole('dialog', { name: 'Workflow diagram' }),

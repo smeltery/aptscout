@@ -7,6 +7,7 @@ import { pages, docHref } from '@/lib/catalog';
 import { DocsHeader, DocsSidebar, DocActions } from '@/components/DocsLayout';
 import '@/styles/docs.css';
 import '@/styles/docs-content.css';
+import '@/styles/doc-actions.css';
 
 type Props = { params: Promise<{ slug?: string[] }> };
 export function generateStaticParams() {

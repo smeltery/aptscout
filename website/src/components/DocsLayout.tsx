@@ -2,7 +2,14 @@
 
 import Link from 'next/link';
 import { useEffect, useRef } from 'react';
-import { ArrowUp, Menu, Search, X, MessageSquare } from 'lucide-react';
+import {
+  ArrowUp,
+  ExternalLink,
+  Menu,
+  Search,
+  X,
+  MessageSquare,
+} from 'lucide-react';
 import { BrandIcon } from './BrandIcon';
 import { Brand, repository } from './Brand';
 import { pages, docHref } from '@/lib/catalog';
@@ -89,6 +96,9 @@ export function DocsHeader() {
       <dialog
         className="docs-drawer"
         ref={menu}
+        onClick={(event) => {
+          if ((event.target as HTMLElement).closest('a')) menu.current?.close();
+        }}
         aria-label="Documentation navigation"
       >
         <div className="mobile-panel-heading">
@@ -139,26 +149,36 @@ export function DocActions({
         <summary>
           <MessageSquare size={17} />
           Open in chat
+          <span className="action-chevron" aria-hidden="true">
+            ⌄
+          </span>
         </summary>
-        {[
-          ['chatgpt', 'ChatGPT', `https://chatgpt.com/?q=${prompt}`],
-          ['claude', 'Claude', `https://claude.ai/new?q=${prompt}`],
-          ['v0', 'v0', `https://v0.app/?q=${prompt}`],
-          ['t3', 'T3 Chat', `https://t3.chat/new?q=${prompt}`],
-          ['scira', 'Scira', `https://scira.ai/?q=${prompt}`],
-          ['cursor', 'Cursor', `https://cursor.com/link/prompt?text=${prompt}`],
-        ].map(([icon, label, href]) => (
-          <Link
-            className="icon-link"
-            key={icon}
-            href={href}
-            target="_blank"
-            rel="noreferrer"
-          >
-            <BrandIcon name={icon} />
-            {label}
-          </Link>
-        ))}
+        <div className="chat-providers">
+          {[
+            ['chatgpt', 'ChatGPT', `https://chatgpt.com/?q=${prompt}`],
+            ['claude', 'Claude', `https://claude.ai/new?q=${prompt}`],
+            ['v0', 'v0', `https://v0.app/?q=${prompt}`],
+            ['t3', 'T3 Chat', `https://t3.chat/new?q=${prompt}`],
+            ['scira', 'Scira', `https://scira.ai/?q=${prompt}`],
+            [
+              'cursor',
+              'Cursor',
+              `https://cursor.com/link/prompt?text=${prompt}`,
+            ],
+          ].map(([icon, label, href]) => (
+            <Link
+              className="icon-link"
+              key={icon}
+              href={href}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <BrandIcon name={icon} />
+              <span>{label}</span>
+              <ExternalLink size={14} strokeWidth={1.5} aria-hidden="true" />
+            </Link>
+          ))}
+        </div>
         <p className="chat-note">
           Opens with this page’s documentation in the prompt.
         </p>

@@ -68,6 +68,7 @@ export function SearchDialog({
         {results.map((page) => (
           <a
             className="search-result"
+            onClick={() => dialogRef.current?.close()}
             key={page.slug}
             href={docHref(page.slug)}
           >

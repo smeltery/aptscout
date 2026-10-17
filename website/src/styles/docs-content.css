@@ -92,31 +92,6 @@
   color: #706052;
   line-height: 1.4;
 }
-.doc-actions {
-  display: grid;
-  gap: 5px;
-  border-top: 1px solid var(--line);
-  padding-top: 16px;
-  margin-top: 28px;
-  font-size: 12px;
-  color: #786052;
-}
-.doc-actions > a,
-.doc-actions > button,
-.doc-actions summary {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  padding: 10px 0;
-  font-size: 12px;
-  background: transparent;
-  border: 0;
-  text-align: left;
-}
-.doc-actions details a {
-  display: block;
-  padding: 10px;
-}
 .docs-pagination {
   display: flex;
   justify-content: space-between;
@@ -247,14 +222,6 @@
   .docs-main td code {
     font-size: 10px;
   }
-}
-.doc-actions details .icon-link {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.doc-actions .chat-note {
-  font-size: 10px;
 }
 .docs-code {
   border: 1px solid #e7d7c6;
