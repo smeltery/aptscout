@@ -1,6 +1,4 @@
-# aptscout
-
-<p align="center"><img src="website/public/logo.svg" width="64" alt="aptscout logo"></p>
+# <img src="website/public/logo.svg" width="40" height="40" alt=""> aptscout
 
 Apartment listings change. Keep the full picture.
 
