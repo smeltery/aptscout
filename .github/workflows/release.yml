@@ -31,7 +31,7 @@ jobs:
       - uses: flox/install-flox-action@v2
       - name: Verify Go release
         run: flox activate -- bash scripts/check.sh go
-      - uses: actions/setup-go@v6
+      - uses: actions/setup-go@v7
         with:
           go-version-file: go.mod
       - uses: goreleaser/goreleaser-action@v6
