@@ -7,14 +7,27 @@ import {
   writeFile,
   rm,
 } from 'node:fs/promises';
+import { createHash } from 'node:crypto';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 
+type Entry = { source: string; image: string };
 const root = resolve(import.meta.dir, '..');
 const output = join(root, 'website/public/diagrams');
-await mkdir(output, { recursive: true });
+const check = process.argv.includes('--check');
+const digest = (value: string) =>
+  createHash('sha256').update(value).digest('hex');
+const manifestPath = join(output, 'manifest.json');
+let previous: Record<string, Entry> = {};
+try {
+  previous = JSON.parse(await readFile(manifestPath, 'utf8'));
+} catch (error) {
+  if ((error as NodeJS.ErrnoException).code !== 'ENOENT') throw error;
+}
+const manifest: Record<string, Entry> = {};
 const temporary = await mkdtemp(join(tmpdir(), 'aptscout-diagrams-'));
 try {
+  await mkdir(output, { recursive: true });
   const config = join(temporary, 'puppeteer.json');
   await writeFile(
     config,
@@ -24,12 +37,33 @@ try {
         process.env.PUPPETEER_EXECUTABLE_PATH || chromium.executablePath(),
     }),
   );
-  for (const file of await readdir(join(root, 'docs'))) {
+  for (const file of (await readdir(join(root, 'docs'))).sort()) {
     if (!file.endsWith('.md')) continue;
     const markdown = await readFile(join(root, 'docs', file), 'utf8');
     let index = 0;
     for (const match of markdown.matchAll(/^```mermaid\r?\n([\s\S]*?)^```/gm)) {
+      const name = `${file.slice(0, -3)}-${index++}.svg`;
+      const source = digest(match[1]);
+      let saved = '';
+      try {
+        saved = await readFile(join(output, name), 'utf8');
+      } catch (error) {
+        if ((error as NodeJS.ErrnoException).code !== 'ENOENT') throw error;
+      }
+      const current =
+        previous[name]?.source === source &&
+        previous[name]?.image === digest(saved) &&
+        saved.length > 0;
+      if (check) {
+        if (!current)
+          throw new Error(
+            `${name} is stale or missing. Run bun run docs and commit the generated diagrams.`,
+          );
+        manifest[name] = previous[name];
+        continue;
+      }
       const input = join(temporary, 'diagram.mmd');
+      const rendered = join(temporary, 'diagram.svg');
       await writeFile(input, match[1]);
       const result = Bun.spawnSync(
         [
@@ -37,7 +71,7 @@ try {
           '-i',
           input,
           '-o',
-          join(output, `${file.slice(0, -3)}-${index++}.svg`),
+          rendered,
           '-b',
           'transparent',
           '-t',
@@ -48,9 +82,34 @@ try {
         { stdout: 'inherit', stderr: 'inherit' },
       );
       if (result.exitCode)
-        throw new Error(`Invalid Mermaid diagram in ${file}`);
+        throw new Error(
+          `Could not render Mermaid in ${file}; inspect the renderer error above.`,
+        );
+      if (current) {
+        manifest[name] = previous[name];
+        continue;
+      }
+      const image = await readFile(rendered, 'utf8');
+      await writeFile(join(output, name), image);
+      manifest[name] = { source, image: digest(image) };
     }
   }
+  if (check) {
+    if (
+      Object.keys(previous).sort().join() !==
+      Object.keys(manifest).sort().join()
+    )
+      throw new Error('Diagram manifest is stale. Run bun run docs.');
+  } else {
+    for (const name of Object.keys(previous)) {
+      if (!manifest[name] && /^[\w-]+\.svg$/.test(name))
+        await rm(join(output, name), { force: true });
+    }
+    await writeFile(manifestPath, JSON.stringify(manifest, null, 2) + '\n');
+  }
+  console.log(
+    `${Object.keys(manifest).length} Mermaid diagrams ${check ? 'verified' : 'rendered and validated'}.`,
+  );
 } finally {
   await rm(temporary, { recursive: true, force: true });
 }

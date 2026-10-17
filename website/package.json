@@ -4,7 +4,7 @@
   "version": "0.1.0",
   "scripts": {
     "dev": "next dev -p 3005",
-    "prebuild": "bun run ../scripts/diagrams.ts",
+    "prebuild": "bun run ../scripts/diagrams.ts --check",
     "build": "next build",
     "start": "next start -p 3005",
     "typecheck": "tsc --noEmit"

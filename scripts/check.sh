@@ -13,6 +13,7 @@ case "${1:-all}" in
   docs)
     bun run check
     bunx --no-install markdownlint-cli2
+    bun run scripts/diagrams.ts --check
     bun run docs
     ;;
   web)

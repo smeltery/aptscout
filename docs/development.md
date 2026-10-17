@@ -24,7 +24,7 @@ bun run docs
 bun run --cwd website dev
 ```
 
-The website runs at `http://localhost:3005`. Generate diagrams before starting development after changing Mermaid blocks. `bun run --cwd website build` generates diagrams and creates a production build; `bun run --cwd website start` previews it.
+The website runs at `http://localhost:3005`. Generate diagrams before starting development after changing Mermaid blocks. `bun run --cwd website build` verifies checked-in diagrams and creates a production build; `bun run --cwd website start` previews it.
 
 Set `NEXT_PUBLIC_SITE_URL` to the real public origin when deploying. Without it, robots disallows indexing and the sitemap is empty. Keep Vercel's project root set to `website` with access to files outside the root; the build reads `../docs` and the workspace lockfile.
 
@@ -58,6 +58,6 @@ The release workflow checks the tag and reruns Go verification before GoReleaser
 
 ## Documentation and branding
 
-Add a Markdown page to `docs/` and its navigation entry to `website/src/lib/catalog.ts`. Keep links relative in Markdown. Mermaid fences are rendered and validated with the same renderer used for the website. Add route coverage when expanding the site.
+Add a Markdown page to `docs/` and its navigation entry to `website/src/lib/catalog.ts`. Keep links relative in Markdown. Run `bun run docs` after editing Mermaid fences and commit `website/public/diagrams/` with the source. CI renders every diagram to validate its syntax. Production builds check source and SVG hashes, so stale assets fail without requiring a browser on the hosting service. Add route coverage when expanding the site.
 
 The apartment mark is `website/public/logo.svg`. The social image source is `website/public/og-image.svg`; regenerate its PNG with `bun run scripts/social-image.ts`. The README references the same assets.
