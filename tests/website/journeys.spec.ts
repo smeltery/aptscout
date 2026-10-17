@@ -140,3 +140,30 @@ test('documentation copy and diagram controls work', async ({
     page.getByRole('button', { name: 'Expand diagram' }),
   ).toBeFocused();
 });
+
+for (const width of [390, 1440]) {
+  test(`main navigation reaches distinct destinations at ${width}px`, async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width, height: 844 });
+    for (const [label, destination, target] of [
+      ['Explore aptscout', '/#features', '#features'],
+      ['Getting started', '/docs/quick-start', 'h1'],
+      ['Our approach', '/#how-it-works', '#how-it-works'],
+    ]) {
+      await page.goto('/brand');
+      if (width < 700)
+        await page.getByRole('button', { name: 'Menu', exact: true }).click();
+      const navigation = page.getByRole('navigation', {
+        name: width < 700 ? 'Mobile navigation' : 'Main navigation',
+        exact: true,
+      });
+      await navigation.getByRole('link', { name: new RegExp(label) }).click();
+      await expect(page).toHaveURL(destination);
+      await expect(page.locator(target)).toBeInViewport();
+      await expect(
+        page.getByRole('dialog', { name: 'Main menu' }),
+      ).not.toBeVisible();
+    }
+  });
+}

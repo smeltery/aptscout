@@ -49,11 +49,9 @@ export function MarketingNav() {
         <div className="wrap header-inner">
           <Brand />
           <nav className="desktop-nav" aria-label="Main navigation">
-            <Link href="/" aria-current={pathname === '/' ? 'page' : undefined}>
-              Explore aptscout
-            </Link>
+            <Link href="/#features">Explore aptscout</Link>
             <Link href="/docs/quick-start">Getting started</Link>
-            <Link href="/docs">Our approach</Link>
+            <Link href="/#how-it-works">Our approach</Link>
           </nav>
           <button
             className="header-search-trigger"
@@ -103,7 +101,7 @@ export function MarketingNav() {
             Search docs & guides<kbd>⌘ K</kbd>
           </button>
           <nav className="mobile-primary" aria-label="Mobile navigation">
-            <Link className="mobile-feature-card" href="/docs">
+            <Link className="mobile-feature-card" href="/#features">
               <span className="nav-card-icon">
                 <Grid2X2 />
               </span>
@@ -118,7 +116,7 @@ export function MarketingNav() {
                 <strong>Getting started</strong>
                 <small>From install to your first listing.</small>
               </Link>
-              <Link href="/docs/data">
+              <Link href="/#how-it-works">
                 <Compass />
                 <strong>Our approach</strong>
                 <small>Your search, stored on your device.</small>
